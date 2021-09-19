@@ -1,0 +1,69 @@
+<html>
+<head>
+<title>Main.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #629755; font-style: italic;}
+.s3 { color: #629755; font-weight: bold; font-style: italic;}
+.s4 { color: #808080;}
+.s5 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Main.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.zelyder.lab2</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">com.zelyder.lab2.animals.ColdBlooded</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.zelyder.lab2.animals.Feathered</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.zelyder.lab2.animals.Ungulates</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.zelyder.lab2.animals.Waterfowl</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.zelyder.lab2.aviarys.Aquarium</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.zelyder.lab2.aviarys.MeshAviary</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.zelyder.lab2.aviarys.NightAviary</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.zelyder.lab2.aviarys.OpenAviary</span><span class="s0">;</span>
+
+<span class="s2">/**</span>
+ <span class="s2">* Вариант 6</span>
+ <span class="s2">* </span><span class="s3">@author </span><span class="s2">Андрей Корощупов</span>
+ <span class="s2">* </span><span class="s3">@version </span><span class="s2">1.0</span>
+ <span class="s2">*/</span>
+<span class="s0">public class </span><span class="s1">Main {</span>
+
+    <span class="s2">/**</span>
+     <span class="s2">* Точка входа в программу</span>
+     <span class="s2">* </span><span class="s3">@param </span><span class="s2">args аргументы косандной строки</span>
+     <span class="s2">*/</span>
+    <span class="s0">public static void </span><span class="s1">main(String[] args) {</span>
+        
+        <span class="s4">// Иницилизация вальеров</span>
+        <span class="s1">Aquarium aquarium = </span><span class="s0">new </span><span class="s1">Aquarium()</span><span class="s0">;</span>
+        <span class="s1">MeshAviary meshAviary = </span><span class="s0">new </span><span class="s1">MeshAviary()</span><span class="s0">;</span>
+        <span class="s1">NightAviary nightAviary = </span><span class="s0">new </span><span class="s1">NightAviary()</span><span class="s0">;</span>
+        <span class="s1">OpenAviary openAviary = </span><span class="s0">new </span><span class="s1">OpenAviary()</span><span class="s0">;</span>
+
+        <span class="s4">// Инициализация животных</span>
+        <span class="s1">Waterfowl fish = </span><span class="s0">new </span><span class="s1">Waterfowl(</span><span class="s5">1.5f</span><span class="s0">, </span><span class="s5">1</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">Feathered bird = </span><span class="s0">new </span><span class="s1">Feathered(</span><span class="s5">0.5f</span><span class="s0">, </span><span class="s5">3</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">ColdBlooded snake = </span><span class="s0">new </span><span class="s1">ColdBlooded(</span><span class="s5">3</span><span class="s0">, </span><span class="s5">5</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">Ungulates bull = </span><span class="s0">new </span><span class="s1">Ungulates(</span><span class="s5">450</span><span class="s0">, </span><span class="s5">4</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s4">// Перемещаем животных в соответсвующие вальеры</span>
+        <span class="s1">fish.move(aquarium)</span><span class="s0">;</span>
+        <span class="s1">bird.move(meshAviary)</span><span class="s0">;</span>
+        <span class="s1">snake.move(nightAviary)</span><span class="s0">;</span>
+        <span class="s1">bull.move(openAviary)</span><span class="s0">;</span>
+
+        <span class="s4">// Проверим, что мы не можем поместить животное в не подходящий вальер</span>
+        <span class="s1">bird.move(aquarium)</span><span class="s0">;</span>
+
+    <span class="s1">}</span>
+<span class="s1">}</span>
+</pre>
+</body>
+</html>
