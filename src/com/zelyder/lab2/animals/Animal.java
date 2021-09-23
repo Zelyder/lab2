@@ -61,8 +61,8 @@ public abstract class Animal {
     @Override
     public String toString() {
         return "животное " + name +
-                " весом " + weight +
-                " кг и возрастом " + age + "\n" +
+                " весом " + (Math.ceil(weight * 100) / 100) +
+                " кг и возрастом " + age + " месяцов \n" +
                 "id = " + id;
     }
 }
