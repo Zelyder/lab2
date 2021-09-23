@@ -6,7 +6,7 @@ import com.zelyder.lab2.aviarys.OpenAviary;
 
 public class Waterfowl extends Animal{
 
-    public Waterfowl(float weight, int age) {
+    public Waterfowl(double weight, int age) {
         super(weight, age);
     }
 
@@ -16,12 +16,15 @@ public class Waterfowl extends Animal{
     }
 
     @Override
-    public void move(Aviary aviary) {
-        if (aviary instanceof Aquarium) {
+    public boolean move(Aviary aviary) {
+        if (aviary instanceof Aquarium && aviary.canAdd(this)) {
             System.out.println(this + " перевозят в новый акувариум");
+            aviary.addAnimal(this);
+            return true;
         } else {
             System.out.println("Водоплавающие животное не возможно переместить в вальер типа " +
                     aviary.getClass().getSimpleName());
+            return false;
         }
     }
 }

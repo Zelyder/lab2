@@ -5,7 +5,7 @@ import com.zelyder.lab2.aviarys.NightAviary;
 
 public class ColdBlooded extends Animal {
 
-    public ColdBlooded(float weight, int age) {
+    public ColdBlooded(double weight, int age) {
         super(weight, age);
     }
 
@@ -15,12 +15,15 @@ public class ColdBlooded extends Animal {
     }
 
     @Override
-    public void move(Aviary aviary) {
-        if (aviary instanceof NightAviary) {
+    public boolean move(Aviary aviary) {
+        if (aviary instanceof NightAviary && aviary.canAdd(this)) {
             System.out.println(this + " перевозят в новый вальер с инфракрасным освещением");
+            aviary.addAnimal(this);
+            return true;
         } else {
             System.out.println("Хладнокровное животное не возможно переместить в вальер типа " +
                     aviary.getClass().getSimpleName());
+            return false;
         }
     }
 }
