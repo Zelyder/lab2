@@ -2,9 +2,10 @@ package com.zelyder.lab2.animals;
 
 import com.zelyder.lab2.aviarys.Aviary;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public abstract class Animal {
+public abstract class Animal implements Serializable {
     private final String id;
     private String name = "";
     private double weight = 0;

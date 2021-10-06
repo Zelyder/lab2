@@ -3,7 +3,9 @@ package com.zelyder.lab2.aviarys;
 import com.zelyder.lab2.animals.Animal;
 import com.zelyder.lab2.animals.Waterfowl;
 
-public class Aquarium extends Aviary{
+import java.io.Serializable;
+
+public class Aquarium extends Aviary implements Serializable {
 
     public Aquarium(){
         super();

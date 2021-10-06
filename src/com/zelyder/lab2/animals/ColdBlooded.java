@@ -3,7 +3,9 @@ package com.zelyder.lab2.animals;
 import com.zelyder.lab2.aviarys.Aviary;
 import com.zelyder.lab2.aviarys.NightAviary;
 
-public class ColdBlooded extends Animal {
+import java.io.Serializable;
+
+public class ColdBlooded extends Animal implements Serializable {
 
     public ColdBlooded(double weight, int age) {
         super(weight, age);

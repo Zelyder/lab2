@@ -3,7 +3,9 @@ package com.zelyder.lab2.aviarys;
 import com.zelyder.lab2.animals.Animal;
 import com.zelyder.lab2.animals.Ungulates;
 
-public class OpenAviary extends Aviary{
+import java.io.Serializable;
+
+public class OpenAviary extends Aviary implements Serializable {
     public OpenAviary(){
         super();
     }

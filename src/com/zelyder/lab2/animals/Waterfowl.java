@@ -4,7 +4,9 @@ import com.zelyder.lab2.aviarys.Aquarium;
 import com.zelyder.lab2.aviarys.Aviary;
 import com.zelyder.lab2.aviarys.OpenAviary;
 
-public class Waterfowl extends Animal{
+import java.io.Serializable;
+
+public class Waterfowl extends Animal implements Serializable {
 
     public Waterfowl(double weight, int age) {
         super(weight, age);

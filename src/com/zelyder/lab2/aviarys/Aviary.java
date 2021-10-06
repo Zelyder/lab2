@@ -2,10 +2,11 @@ package com.zelyder.lab2.aviarys;
 
 import com.zelyder.lab2.animals.Animal;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public abstract class Aviary {
+public abstract class Aviary implements Serializable {
     private final String id;
     private String name = "";
     private int capacity = 5;

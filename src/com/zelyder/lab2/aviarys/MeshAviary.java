@@ -3,7 +3,9 @@ package com.zelyder.lab2.aviarys;
 import com.zelyder.lab2.animals.Animal;
 import com.zelyder.lab2.animals.Feathered;
 
-public class MeshAviary extends Aviary{
+import java.io.Serializable;
+
+public class MeshAviary extends Aviary implements Serializable {
     public MeshAviary(){
         super();
     }

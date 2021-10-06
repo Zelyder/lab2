@@ -6,8 +6,6 @@ import com.zelyder.lab2.aviarys.MeshAviary;
 import com.zelyder.lab2.aviarys.NightAviary;
 import com.zelyder.lab2.aviarys.OpenAviary;
 
-import java.io.InputStream;
-import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -21,9 +19,11 @@ public class Main {
     /**
      * Точка входа в программу
      * Управление
+     * 0) Выход
      * 1) Показать весь зоопарк
      * 2) Добавить случайное животное в зоопарк
-     * 3) Выход
+     * 3) Загрузить БД из файла
+     * 4) Сохранить БД в файл
      *
      * @param args аргументы косандной строки
      */
@@ -39,7 +39,7 @@ public class Main {
 
     private static void printMenu() {
         System.out.println(
-                "1) Показать весь зоопарк \n2) Добавить случайное животное в зоопарк \n3) Выход"
+                "0) Выход \n1) Показать весь зоопарк \n2) Добавить случайное животное в зоопарк \n3) Загрузить БД из файла \n4) Сохранить БД в файл"
         );
     }
 
@@ -48,14 +48,40 @@ public class Main {
             try {
                 Scanner sc = new Scanner(System.in);
                 switch (sc.nextInt()) {
+                    case 0:
+                        return;
                     case 1:
-                        System.out.println(zoo.toString());
+                        if (zoo != null) {
+                            System.out.println(zoo);
+                        } else {
+                            System.out.println("Zoo не инициализирован!");
+                        }
                         break;
                     case 2:
-                        zoo.addAnimal(randomAnimal());
+                        if (zoo != null) {
+                            zoo.addAnimal(randomAnimal());
+                        } else {
+                            System.out.println("Zoo не инициализирован!");
+                        }
                         break;
                     case 3:
-                        return;
+                        if (Zoo.getFromFile() != null) {
+                            zoo = Zoo.getFromFile();
+                            System.out.println("Файл успешно загружен!");
+                        } else {
+                            System.out.println("Ошибка загрузки! Проверьте наличие файла " + Zoo.PATH_TO_DB);
+                        }
+                        break;
+                    case 4:
+                        if (zoo != null) {
+                            if (zoo.saveToFile()) {
+                                System.out.println("БД успешно сохранена в файл " + Zoo.PATH_TO_DB);
+                            } else {
+                                System.out.println("Ошибка Сохранения файла!");
+                            }
+                        }
+
+                        break;
                     default:
                         System.out.println("Введина не существующая команда!\nИспользуйте одну из этих команд:");
                 }
@@ -103,10 +129,11 @@ public class Main {
         return zoo;
     }
 
-    public static int getRandomIntegerBetweenRange(int min, int max){
-        return (int)(Math.random()*((max-min)+1))+min;
+    public static int getRandomIntegerBetweenRange(int min, int max) {
+        return (int) (Math.random() * ((max - min) + 1)) + min;
     }
-    public static double getRandomDoubleBetweenRange(double min, double max){
-        return (Math.random()*((max-min)+1))+min;
+
+    public static double getRandomDoubleBetweenRange(double min, double max) {
+        return (Math.random() * ((max - min) + 1)) + min;
     }
 }

@@ -3,7 +3,9 @@ package com.zelyder.lab2.animals;
 import com.zelyder.lab2.aviarys.Aviary;
 import com.zelyder.lab2.aviarys.MeshAviary;
 
-public class Feathered extends Animal{
+import java.io.Serializable;
+
+public class Feathered extends Animal implements Serializable {
 
     public Feathered(double weight, int age) {
         super(weight, age);

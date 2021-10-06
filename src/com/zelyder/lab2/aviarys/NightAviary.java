@@ -3,7 +3,9 @@ package com.zelyder.lab2.aviarys;
 import com.zelyder.lab2.animals.Animal;
 import com.zelyder.lab2.animals.ColdBlooded;
 
-public class NightAviary extends Aviary{
+import java.io.Serializable;
+
+public class NightAviary extends Aviary implements Serializable {
     public NightAviary(){
         super();
     }
