@@ -5,7 +5,9 @@ import com.zelyder.lab2.aviarys.Aquarium;
 import com.zelyder.lab2.aviarys.MeshAviary;
 import com.zelyder.lab2.aviarys.NightAviary;
 import com.zelyder.lab2.aviarys.OpenAviary;
+import org.jetbrains.annotations.Nullable;
 
+import java.util.Locale;
 import java.util.Scanner;
 
 /**
@@ -32,7 +34,18 @@ public class Main {
         // Инициализация зоопарка
         Zoo zoo = initZoo();
 
+        // Загрузка настроек
+        Settings settings = initSettings();
+        if (settings != null){
+            System.out.println("Добро пожаловать " + settings.login);
+            System.out.println("Запись в лог:" + settings.writeLog);
+        }else {
+            System.out.println("Ошибка инициализации настроек");
+        }
+
+        // Вывод на экран главного меню
         printMenu();
+        // Обработка действий пользователя
         handleInputMenu(zoo);
 
     }
@@ -127,6 +140,43 @@ public class Main {
         zoo.addAviary(nightAviary);
         zoo.addAviary(openAviary);
         return zoo;
+    }
+
+    private static @Nullable Settings initSettings() {
+        if (Settings.getFromFile() == null){
+            try {
+                Scanner scanner = new Scanner(System.in);
+
+                System.out.println("Введите логин: ");
+                String login = scanner.next();
+
+                boolean writeLog = false;
+                System.out.println("Записывать ли логи?\nВведите да или нет:");
+                boolean correctInput = false;
+                while (!correctInput){
+                    switch (scanner.next().trim().toLowerCase(Locale.ROOT)){
+                        case "да":
+                            writeLog = true;
+                            correctInput = true;
+                            break;
+                        case "нет":
+                            correctInput = true;
+                            break;
+                        default:
+                            System.out.println("Неверный ввод!\nВведите да или нет:");
+                    }
+                }
+                Settings settings = new Settings(login, writeLog);
+                settings.saveToFile();
+                return settings;
+            }catch (Exception exception){
+                exception.printStackTrace();
+                return null;
+            }
+        }
+        else {
+            return Settings.getFromFile();
+        }
     }
 
     public static int getRandomIntegerBetweenRange(int min, int max) {
