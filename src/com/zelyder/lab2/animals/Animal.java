@@ -7,7 +7,6 @@ import java.util.UUID;
 
 public abstract class Animal implements Serializable {
     private final String id;
-    private String name = "";
     private double weight = 0;
     private int age = 0;
 
@@ -17,14 +16,6 @@ public abstract class Animal implements Serializable {
 
     public String getId() {
         return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public double getWeight() {
@@ -61,7 +52,7 @@ public abstract class Animal implements Serializable {
 
     @Override
     public String toString() {
-        return "животное " + name +
+        return "животное " +
                 " весом " + (Math.ceil(weight * 100) / 100) +
                 " кг и возрастом " + age + " месяцов \n" +
                 "id = " + id;

@@ -7,8 +7,11 @@ import com.zelyder.lab2.aviarys.NightAviary;
 import com.zelyder.lab2.aviarys.OpenAviary;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.IOException;
 import java.util.Locale;
 import java.util.Scanner;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 /**
  * Вариант 6
@@ -29,6 +32,7 @@ public class Main {
      *
      * @param args аргументы косандной строки
      */
+
     public static void main(String[] args) {
 
         // Инициализация зоопарка
@@ -39,15 +43,17 @@ public class Main {
         if (settings != null){
             System.out.println("Добро пожаловать " + settings.login);
             System.out.println("Запись в лог:" + settings.writeLog);
+            Log.info("Страт программы под логином " + settings.login);
         }else {
             System.out.println("Ошибка инициализации настроек");
         }
+
+
 
         // Вывод на экран главного меню
         printMenu();
         // Обработка действий пользователя
         handleInputMenu(zoo);
-
     }
 
     private static void printMenu() {
@@ -62,12 +68,14 @@ public class Main {
                 Scanner sc = new Scanner(System.in);
                 switch (sc.nextInt()) {
                     case 0:
+                        Log.info("Выход из программы");
                         return;
                     case 1:
                         if (zoo != null) {
                             System.out.println(zoo);
                         } else {
                             System.out.println("Zoo не инициализирован!");
+                            Log.error("Zoo не инициализирован!");
                         }
                         break;
                     case 2:
@@ -75,6 +83,7 @@ public class Main {
                             zoo.addAnimal(randomAnimal());
                         } else {
                             System.out.println("Zoo не инициализирован!");
+                            Log.error("Zoo не инициализирован!");
                         }
                         break;
                     case 3:
@@ -101,6 +110,7 @@ public class Main {
                 printMenu();
             } catch (Exception ex) {
                 System.out.println("Ошибка ввода!\nИспользуйте одну из этих команд:");
+                Log.error("Ошибка ввода!");
                 printMenu();
             }
         }
@@ -170,7 +180,7 @@ public class Main {
                 settings.saveToFile();
                 return settings;
             }catch (Exception exception){
-                exception.printStackTrace();
+                Log.error(exception.getMessage());
                 return null;
             }
         }

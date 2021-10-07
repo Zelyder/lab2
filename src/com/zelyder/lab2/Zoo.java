@@ -10,7 +10,6 @@ import java.util.List;
 
 public class Zoo implements Serializable {
     public final static String PATH_TO_DB = "zoo.db";
-    public final static String PATH_TO_LOG = "log.txt";
 
     private ArrayList<Aviary> aviaries = new ArrayList<>();
 
@@ -34,6 +33,7 @@ public class Zoo implements Serializable {
         for (Aviary aviary: aviaries) {
             if (aviary.canAdd(animal)) {
                 animal.move(aviary);
+                Log.info("Добавлено животное:" + animal);
                 break;
             }
         }
@@ -68,9 +68,10 @@ public class Zoo implements Serializable {
             objectOutputStream.writeObject(this);
             //закрываем поток и освобождаем ресурсы
             objectOutputStream.close();
+            Log.info("БД успешно сохранено в файл" + PATH_TO_DB);
             return true;
         }catch (IOException exception){
-            exception.printStackTrace();
+            Log.error(exception.getMessage());
             return false;
         }
     }
@@ -83,9 +84,10 @@ public class Zoo implements Serializable {
 
             Zoo zooList = (Zoo) objectInputStream.readObject();
             objectInputStream.close();
+            Log.info("БД успешно загружена из файла" + PATH_TO_DB);
             return zooList;
         }catch (Exception exception){
-            exception.printStackTrace();
+            Log.error("Ошибка записи в файл");
             return null;
         }
     }
