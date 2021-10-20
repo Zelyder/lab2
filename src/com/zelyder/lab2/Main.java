@@ -7,11 +7,8 @@ import com.zelyder.lab2.aviarys.NightAviary;
 import com.zelyder.lab2.aviarys.OpenAviary;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.IOException;
 import java.util.Locale;
 import java.util.Scanner;
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
 
 /**
  * Вариант 6
