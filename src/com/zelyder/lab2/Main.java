@@ -141,7 +141,7 @@ public class Main {
         NightAviary nightAviary = new NightAviary();
         OpenAviary openAviary = new OpenAviary();
 
-        Zoo zoo = new Zoo();
+        Zoo zoo = new Zoo(Zoo.TypeOfList.ArrayList);
         zoo.addAviary(aquarium);
         zoo.addAviary(meshAviary);
         zoo.addAviary(nightAviary);

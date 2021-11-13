@@ -6,18 +6,31 @@ import com.zelyder.lab2.aviarys.Aviary;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Zoo implements Serializable {
     public final static String PATH_TO_DB = "zoo.db";
 
-    private ArrayList<Aviary> aviaries = new ArrayList<>();
-
-    public ArrayList<Aviary> getAviaries() {
-        return aviaries;
+    public Zoo(TypeOfList type) {
+        if (type == TypeOfList.ArrayList){
+            aviaries = new ArrayList<>();
+        }else if (type == TypeOfList.LinkedList){
+            aviaries = new LinkedList<>();
+        }
     }
 
-    public void setAviaries(ArrayList<Aviary> aviaries) {
+    private List<Aviary> aviaries;
+
+    public ArrayList<Aviary> getArrayListAviaries() {
+        return new ArrayList<>(aviaries);
+    }
+
+    public LinkedList<Aviary> getLinkedListAviaries() {
+        return new LinkedList<>(aviaries);
+    }
+
+    public void setAviaries(List<Aviary> aviaries) {
         this.aviaries = aviaries;
     }
 
@@ -27,6 +40,18 @@ public class Zoo implements Serializable {
 
     public void removeAviary(Aviary aviary) {
         aviaries.remove(aviary);
+    }
+    public void removeAviaryByIndex(int index) {
+        aviaries.remove(index);
+    }
+
+    public List<Aviary> switchAviaryListType(TypeOfList type){
+        if (type == TypeOfList.ArrayList){
+            aviaries = getArrayListAviaries();
+        }else if (type == TypeOfList.LinkedList){
+            aviaries = getLinkedListAviaries();
+        }
+        return aviaries;
     }
 
     public void addAnimal(Animal animal) {
@@ -39,7 +64,7 @@ public class Zoo implements Serializable {
         }
     }
 
-    public void addAnimals(ArrayList<Animal> animals){
+    public void addAnimals(List<Animal> animals){
         for (Animal animal: animals) {
             addAnimal(animal);
         }
@@ -91,4 +116,6 @@ public class Zoo implements Serializable {
             return null;
         }
     }
+
+    enum TypeOfList {ArrayList, LinkedList}
 }
