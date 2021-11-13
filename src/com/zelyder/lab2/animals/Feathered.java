@@ -3,9 +3,11 @@ package com.zelyder.lab2.animals;
 import com.zelyder.lab2.aviarys.Aviary;
 import com.zelyder.lab2.aviarys.MeshAviary;
 
-public class Feathered extends Animal{
+import java.io.Serializable;
 
-    public Feathered(float weight, int age) {
+public class Feathered extends Animal implements Serializable {
+
+    public Feathered(double weight, int age) {
         super(weight, age);
     }
 
@@ -15,12 +17,16 @@ public class Feathered extends Animal{
     }
 
     @Override
-    public void move(Aviary aviary) {
-        if (aviary instanceof MeshAviary) {
+    public boolean move(Aviary aviary) {
+        if (aviary instanceof MeshAviary && aviary.canAdd(this)) {
             System.out.println(this + " перевозят в новый вальер покрытый сеткой");
+            aviary.addAnimal(this);
+            return true;
+
         } else {
             System.out.println("Пернатое животное не возможно переместить в вальер типа " +
                     aviary.getClass().getSimpleName());
+            return false;
         }
     }
 }

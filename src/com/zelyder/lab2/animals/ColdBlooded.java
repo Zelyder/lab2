@@ -3,9 +3,11 @@ package com.zelyder.lab2.animals;
 import com.zelyder.lab2.aviarys.Aviary;
 import com.zelyder.lab2.aviarys.NightAviary;
 
-public class ColdBlooded extends Animal {
+import java.io.Serializable;
 
-    public ColdBlooded(float weight, int age) {
+public class ColdBlooded extends Animal implements Serializable {
+
+    public ColdBlooded(double weight, int age) {
         super(weight, age);
     }
 
@@ -15,12 +17,15 @@ public class ColdBlooded extends Animal {
     }
 
     @Override
-    public void move(Aviary aviary) {
-        if (aviary instanceof NightAviary) {
+    public boolean move(Aviary aviary) {
+        if (aviary instanceof NightAviary && aviary.canAdd(this)) {
             System.out.println(this + " перевозят в новый вальер с инфракрасным освещением");
+            aviary.addAnimal(this);
+            return true;
         } else {
             System.out.println("Хладнокровное животное не возможно переместить в вальер типа " +
                     aviary.getClass().getSimpleName());
+            return false;
         }
     }
 }

@@ -2,15 +2,27 @@ package com.zelyder.lab2.animals;
 
 import com.zelyder.lab2.aviarys.Aviary;
 
-public abstract class Animal {
-    private float weight = 0;
+import java.io.Serializable;
+import java.util.UUID;
+
+public abstract class Animal implements Serializable {
+    private final String id;
+    private double weight = 0;
     private int age = 0;
 
-    public float getWeight() {
+    public Animal() {
+        id = UUID.randomUUID().toString();
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public double getWeight() {
         return weight;
     }
 
-    public void setWeight(float weight) {
+    public void setWeight(double weight) {
         if (weight >= 0) {
             this.weight = weight;
         } else {
@@ -30,17 +42,19 @@ public abstract class Animal {
         }
     }
 
-    public Animal(float weight, int age) {
+    public Animal(double weight, int age) {
+        this();
         setWeight(weight);
         setAge(age);
     }
 
-    public abstract void move(Aviary aviary);
+    public abstract boolean move(Aviary aviary);
 
     @Override
     public String toString() {
         return "животное " +
-                "весом " + weight +
-                " кг и возрастом " + age;
+                " весом " + (Math.ceil(weight * 100) / 100) +
+                " кг и возрастом " + age + " месяцов \n" +
+                "id = " + id;
     }
 }
