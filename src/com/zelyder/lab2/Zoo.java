@@ -84,7 +84,7 @@ public class Zoo implements Serializable {
 
             Zoo zooList = (Zoo) objectInputStream.readObject();
             objectInputStream.close();
-            Log.info("БД успешно загружена из файла" + PATH_TO_DB);
+            Log.info("БД успешно загружена из файла " + PATH_TO_DB);
             return zooList;
         }catch (Exception exception){
             Log.error("Ошибка записи в файл");

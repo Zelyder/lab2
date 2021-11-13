@@ -173,6 +173,7 @@ public class Main {
                             System.out.println("Неверный ввод!\nВведите да или нет:");
                     }
                 }
+                Log.isLogging = writeLog;
                 Settings settings = new Settings(login, writeLog);
                 settings.saveToFile();
                 return settings;

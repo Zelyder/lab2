@@ -6,22 +6,30 @@ import java.util.Date;
 import java.text.SimpleDateFormat;
 
 public class Log {
-    static void info(String message){
-        try (FileWriter writer = new FileWriter("log.txt", true)){
-            writer.append(getNowTime()).append(" - INFO: ").append(message).append('\n');
-            writer.flush();
-        }catch (IOException exception){
-            Log.error(exception.getMessage());
+    public static Boolean isLogging = true;
+    static void log(String message, Type type) {
+        if(isLogging){
+            String typeName = "";
+            if (type == Type.INFO){
+                typeName = " - INFO: ";
+            } else if (type == Type.ERROR){
+                typeName = " - Error: ";
+            }
+            try (FileWriter writer = new FileWriter("log.txt", true)){
+                writer.append(getNowTime()).append(typeName).append(message).append('\n');
+                writer.flush();
+            }catch (IOException exception){
+                Log.error(exception.getMessage());
+            }
         }
     }
 
+    static void info(String message){
+        log(message, Type.INFO);
+    }
+
     static void error(String errorMessage){
-        try (FileWriter writer = new FileWriter("log.txt", true)){
-            writer.append(getNowTime()).append(" - Error: ").append(errorMessage).append('\n');
-            writer.flush();
-        }catch (IOException exception){
-            Log.error(exception.getMessage());
-        }
+        log(errorMessage, Type.ERROR);
     }
 
     static String getNowTime(){
@@ -30,4 +38,6 @@ public class Log {
 
         return formatForDateNow.format(dateNow);
     }
+
+    enum Type { INFO, ERROR }
 }
