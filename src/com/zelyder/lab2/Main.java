@@ -41,7 +41,7 @@ public class Main {
         {
             EventQueue.invokeLater(() -> {
                 JFrame frame = new DrawFrame();
-                frame.setTitle("DrawTest");
+                frame.setTitle("Draw List Tests result");
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setVisible(true);
             });
