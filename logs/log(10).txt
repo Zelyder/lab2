@@ -1,0 +1,30 @@
+Вс 2021.11.14  время 04:02:35 PM MSK - INFO: ArrayList
+Вс 2021.11.14  время 04:02:35 PM MSK - ADD: index=0 ,time=5700
+Вс 2021.11.14  время 04:02:35 PM MSK - ADD: index=1 ,time=1200
+Вс 2021.11.14  время 04:02:35 PM MSK - ADD: index=2 ,time=1400
+Вс 2021.11.14  время 04:02:35 PM MSK - ADD: index=3 ,time=900
+Вс 2021.11.14  время 04:02:35 PM MSK - ADD: index=4 ,time=1400
+Вс 2021.11.14  время 04:02:35 PM MSK - ADD: index=5 ,time=3700
+Вс 2021.11.14  время 04:02:35 PM MSK - ADD: index=6 ,time=2000
+Вс 2021.11.14  время 04:02:35 PM MSK - ADD: index=7 ,time=1700
+Вс 2021.11.14  время 04:02:35 PM MSK - ADD: index=8 ,time=1400
+Вс 2021.11.14  время 04:02:35 PM MSK - ADD: index=9 ,time=800
+Вс 2021.11.14  время 04:02:35 PM MSK - REMOVE: index=6 ,time=9500
+Вс 2021.11.14  время 04:02:35 PM MSK - INFO: 
+Add: Total time = 20200, Average time = 2020
+Remove: Total time = 9500, Average time = 9500
+Вс 2021.11.14  время 04:02:35 PM MSK - INFO: LinkedList
+Вс 2021.11.14  время 04:02:35 PM MSK - ADD: index=0 ,time=2200
+Вс 2021.11.14  время 04:02:35 PM MSK - ADD: index=1 ,time=2200
+Вс 2021.11.14  время 04:02:35 PM MSK - ADD: index=2 ,time=3100
+Вс 2021.11.14  время 04:02:35 PM MSK - ADD: index=3 ,time=2500
+Вс 2021.11.14  время 04:02:35 PM MSK - ADD: index=4 ,time=2600
+Вс 2021.11.14  время 04:02:35 PM MSK - ADD: index=5 ,time=2700
+Вс 2021.11.14  время 04:02:35 PM MSK - ADD: index=6 ,time=2300
+Вс 2021.11.14  время 04:02:35 PM MSK - ADD: index=7 ,time=2600
+Вс 2021.11.14  время 04:02:35 PM MSK - ADD: index=8 ,time=2900
+Вс 2021.11.14  время 04:02:35 PM MSK - ADD: index=9 ,time=2200
+Вс 2021.11.14  время 04:02:35 PM MSK - REMOVE: index=9 ,time=23500
+Вс 2021.11.14  время 04:02:35 PM MSK - INFO: 
+Add: Total time = 25300, Average time = 2530
+Remove: Total time = 23500, Average time = 23500

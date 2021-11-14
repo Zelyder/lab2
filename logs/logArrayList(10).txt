@@ -1,0 +1,15 @@
+Вс 2021.11.14  время 04:14:14 PM MSK - INFO: ArrayList
+Вс 2021.11.14  время 04:14:14 PM MSK - ADD: index=0 ,time=5900
+Вс 2021.11.14  время 04:14:14 PM MSK - ADD: index=1 ,time=1800
+Вс 2021.11.14  время 04:14:14 PM MSK - ADD: index=2 ,time=1000
+Вс 2021.11.14  время 04:14:14 PM MSK - ADD: index=3 ,time=1100
+Вс 2021.11.14  время 04:14:14 PM MSK - ADD: index=4 ,time=1200
+Вс 2021.11.14  время 04:14:14 PM MSK - ADD: index=5 ,time=1400
+Вс 2021.11.14  время 04:14:14 PM MSK - ADD: index=6 ,time=1000
+Вс 2021.11.14  время 04:14:14 PM MSK - ADD: index=7 ,time=900
+Вс 2021.11.14  время 04:14:14 PM MSK - ADD: index=8 ,time=1100
+Вс 2021.11.14  время 04:14:14 PM MSK - ADD: index=9 ,time=1600
+Вс 2021.11.14  время 04:14:14 PM MSK - REMOVE: index=5 ,time=7100
+Вс 2021.11.14  время 04:14:14 PM MSK - INFO: 
+Add: Total time = 17000, Average time = 1700
+Remove: Total time = 7100, Average time = 7100
