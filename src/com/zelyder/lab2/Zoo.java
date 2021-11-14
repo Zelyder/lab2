@@ -13,9 +13,9 @@ public class Zoo implements Serializable {
     public final static String PATH_TO_DB = "zoo.db";
 
     public Zoo(TypeOfList type) {
-        if (type == TypeOfList.ArrayList){
+        if (type == TypeOfList.ArrayList) {
             aviaries = new ArrayList<>();
-        }else if (type == TypeOfList.LinkedList){
+        } else if (type == TypeOfList.LinkedList) {
             aviaries = new LinkedList<>();
         }
     }
@@ -34,28 +34,29 @@ public class Zoo implements Serializable {
         this.aviaries = aviaries;
     }
 
-    public void addAviary(Aviary aviary){
+    public void addAviary(Aviary aviary) {
         aviaries.add(aviary);
     }
 
     public void removeAviary(Aviary aviary) {
         aviaries.remove(aviary);
     }
+
     public void removeAviaryByIndex(int index) {
         aviaries.remove(index);
     }
 
-    public List<Aviary> switchAviaryListType(TypeOfList type){
-        if (type == TypeOfList.ArrayList){
+    public List<Aviary> switchAviaryListType(TypeOfList type) {
+        if (type == TypeOfList.ArrayList) {
             aviaries = getArrayListAviaries();
-        }else if (type == TypeOfList.LinkedList){
+        } else if (type == TypeOfList.LinkedList) {
             aviaries = getLinkedListAviaries();
         }
         return aviaries;
     }
 
     public void addAnimal(Animal animal) {
-        for (Aviary aviary: aviaries) {
+        for (Aviary aviary : aviaries) {
             if (aviary.canAdd(animal)) {
                 animal.move(aviary);
                 Log.info("Добавлено животное:" + animal);
@@ -64,27 +65,27 @@ public class Zoo implements Serializable {
         }
     }
 
-    public void addAnimals(List<Animal> animals){
-        for (Animal animal: animals) {
+    public void addAnimals(List<Animal> animals) {
+        for (Animal animal : animals) {
             addAnimal(animal);
         }
     }
 
     @Override
     public String toString() {
-        if (aviaries.isEmpty()){
+        if (aviaries.isEmpty()) {
             return "Зоопарк пуст";
         }
         StringBuilder builder = new StringBuilder();
-        for (Aviary aviary :aviaries){
+        for (Aviary aviary : aviaries) {
             builder.append(aviary.toString());
             builder.append('\n');
         }
         return builder.toString();
     }
 
-    public boolean saveToFile(){
-        try{
+    public boolean saveToFile() {
+        try {
             //создаем 2 потока для сериализации объекта и сохранения его в файл
             FileOutputStream fileOutputStream = new FileOutputStream(PATH_TO_DB);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
@@ -95,15 +96,15 @@ public class Zoo implements Serializable {
             objectOutputStream.close();
             Log.info("БД успешно сохранено в файл" + PATH_TO_DB);
             return true;
-        }catch (IOException exception){
+        } catch (IOException exception) {
             Log.error(exception.getMessage());
             return false;
         }
     }
 
     @Nullable
-    public static Zoo getFromFile(){
-        try{
+    public static Zoo getFromFile() {
+        try {
             FileInputStream fileInputStream = new FileInputStream(PATH_TO_DB);
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
 
@@ -111,7 +112,7 @@ public class Zoo implements Serializable {
             objectInputStream.close();
             Log.info("БД успешно загружена из файла " + PATH_TO_DB);
             return zooList;
-        }catch (Exception exception){
+        } catch (Exception exception) {
             Log.error("Ошибка записи в файл");
             return null;
         }
