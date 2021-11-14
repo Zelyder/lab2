@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public abstract class Aviary implements Serializable {
+    protected Type type;
     private final String id;
     private String name = "";
     private int capacity = 5;
@@ -14,11 +15,16 @@ public abstract class Aviary implements Serializable {
 
     public Aviary() {
         id = UUID.randomUUID().toString();
+        this.type = Type.Null;
     }
 
     public Aviary(int capacity){
         this();
         this.capacity = capacity;
+    }
+
+    public Type getType() {
+        return type;
     }
 
     public ArrayList<Animal> getAnimals() {
@@ -75,5 +81,11 @@ public abstract class Aviary implements Serializable {
                 ", name='" + name + '\'' +
                 ", capacity=" + capacity +
                 ", animals=" + animals + "}";
+    }
+    public enum Type {Null(0), Aquarium(1), Mesh(2), Night(3), Open(4);
+        public int value;
+        Type(int i) {
+            value = i;
+        }
     }
 }

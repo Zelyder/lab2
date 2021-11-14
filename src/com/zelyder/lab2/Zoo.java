@@ -6,60 +6,101 @@ import com.zelyder.lab2.aviarys.Aviary;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Zoo implements Serializable {
     public final static String PATH_TO_DB = "zoo.db";
 
-    private ArrayList<Aviary> aviaries = new ArrayList<>();
-
-    public ArrayList<Aviary> getAviaries() {
-        return aviaries;
+    public Zoo(TypeOfList type) {
+        if (type == TypeOfList.ArrayList) {
+            aviaries = new ArrayList<>();
+        } else if (type == TypeOfList.LinkedList) {
+            aviaries = new LinkedList<>();
+        }
     }
 
-    public void setAviaries(ArrayList<Aviary> aviaries) {
+
+
+    private List<Aviary> aviaries;
+
+    public ArrayList<Aviary> getArrayListAviaries() {
+        return new ArrayList<>(aviaries);
+    }
+
+    public LinkedList<Aviary> getLinkedListAviaries() {
+        return new LinkedList<>(aviaries);
+    }
+
+    public void setAviaries(List<Aviary> aviaries) {
         this.aviaries = aviaries;
     }
 
-    public void addAviary(Aviary aviary){
+    public void addAviary(Aviary aviary) {
+        long start = System.nanoTime();
         aviaries.add(aviary);
+        long end = System.nanoTime();
+        int index = aviaries.size() -1;
+        long time = end - start;
+        Logger.add(index, time);
     }
 
     public void removeAviary(Aviary aviary) {
         aviaries.remove(aviary);
     }
 
+    public void removeAviaryByIndex(int index) {
+        long start = System.nanoTime();
+        aviaries.remove(index);
+        long end = System.nanoTime();
+        long time = end - start;
+        Logger.remove(index, time);
+    }
+
+    public List<Aviary> switchAviaryListType(TypeOfList type) {
+        if (type == TypeOfList.ArrayList) {
+            aviaries = getArrayListAviaries();
+        } else if (type == TypeOfList.LinkedList) {
+            aviaries = getLinkedListAviaries();
+        }
+        return aviaries;
+    }
+
     public void addAnimal(Animal animal) {
-        for (Aviary aviary: aviaries) {
+        for (Aviary aviary : aviaries) {
             if (aviary.canAdd(animal)) {
                 animal.move(aviary);
-                Log.info("Добавлено животное:" + animal);
+                Logger.info("Добавлено животное:" + animal);
                 break;
             }
         }
     }
 
-    public void addAnimals(ArrayList<Animal> animals){
-        for (Animal animal: animals) {
+    public List<Aviary> getAviaries() {
+        return aviaries;
+    }
+
+    public void addAnimals(List<Animal> animals) {
+        for (Animal animal : animals) {
             addAnimal(animal);
         }
     }
 
     @Override
     public String toString() {
-        if (aviaries.isEmpty()){
+        if (aviaries.isEmpty()) {
             return "Зоопарк пуст";
         }
         StringBuilder builder = new StringBuilder();
-        for (Aviary aviary :aviaries){
+        for (Aviary aviary : aviaries) {
             builder.append(aviary.toString());
             builder.append('\n');
         }
         return builder.toString();
     }
 
-    public boolean saveToFile(){
-        try{
+    public boolean saveToFile() {
+        try {
             //создаем 2 потока для сериализации объекта и сохранения его в файл
             FileOutputStream fileOutputStream = new FileOutputStream(PATH_TO_DB);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
@@ -68,27 +109,29 @@ public class Zoo implements Serializable {
             objectOutputStream.writeObject(this);
             //закрываем поток и освобождаем ресурсы
             objectOutputStream.close();
-            Log.info("БД успешно сохранено в файл" + PATH_TO_DB);
+            Logger.info("БД успешно сохранено в файл" + PATH_TO_DB);
             return true;
-        }catch (IOException exception){
-            Log.error(exception.getMessage());
+        } catch (IOException exception) {
+            ErrHandler.addErrWithLog(exception);
             return false;
         }
     }
 
     @Nullable
-    public static Zoo getFromFile(){
-        try{
+    public static Zoo getFromFile() {
+        try {
             FileInputStream fileInputStream = new FileInputStream(PATH_TO_DB);
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
 
             Zoo zooList = (Zoo) objectInputStream.readObject();
             objectInputStream.close();
-            Log.info("БД успешно загружена из файла " + PATH_TO_DB);
+            Logger.info("БД успешно загружена из файла " + PATH_TO_DB);
             return zooList;
-        }catch (Exception exception){
-            Log.error("Ошибка записи в файл");
+        } catch (Exception exception) {
+            ErrHandler.addErrWithLog(exception, "Ошибка записи в файл");
             return null;
         }
     }
+
+    enum TypeOfList {ArrayList, LinkedList}
 }
