@@ -22,7 +22,7 @@ public class DrawFrame extends JFrame
 		GrafDataTitle GTitle = new GrafDataTitle("Проверка", "", 0, 0, 0, 0, "size", "time");
 		
 		//Формируем данные для построения графика суммарного времени добавления для ArrayList
-		ArrayList <Float> X1 = new ArrayList();
+		ArrayList <Float> X1 = new ArrayList<>();
 		X1.add(0F);
 		X1.add(10F);
 		X1.add(100F);
@@ -30,7 +30,7 @@ public class DrawFrame extends JFrame
 		X1.add(10000F);
 		X1.add(100000F);
 
-		ArrayList <Float> Y1 = new ArrayList();
+		ArrayList <Float> Y1 = new ArrayList<>();
 		Y1.add(0F);
 		Y1.add(17000F);
 		Y1.add(108300F);
@@ -39,7 +39,7 @@ public class DrawFrame extends JFrame
 		Y1.add(12326100F);
 
 		//Формируем данные для построения графика суммарного времени добавления для LinkedList
-		ArrayList <Float> X2 = new ArrayList();
+		ArrayList <Float> X2 = new ArrayList<>();
 		X2.add(0F);
 		X2.add(10F);
 		X2.add(100F);
@@ -47,7 +47,7 @@ public class DrawFrame extends JFrame
 		X2.add(10000F);
 		X2.add(100000F);
 
-		ArrayList <Float> Y2 = new ArrayList();
+		ArrayList <Float> Y2 = new ArrayList<>();
 		Y2.add(0F);
 		Y2.add(31500F);
 		Y2.add(254200F);
@@ -56,7 +56,7 @@ public class DrawFrame extends JFrame
 		Y2.add(7634300F);
 
 		//Формируем данные для построения графика среднего времени добавления для ArrayList
-		ArrayList <Float> X3 = new ArrayList();
+		ArrayList <Float> X3 = new ArrayList<>();
 		X3.add(0F);
 		X3.add(10F);
 		X3.add(100F);
@@ -64,7 +64,7 @@ public class DrawFrame extends JFrame
 		X3.add(10000F);
 		X3.add(100000F);
 
-		ArrayList <Float> Y3 = new ArrayList();
+		ArrayList <Float> Y3 = new ArrayList<>();
 		Y3.add(0F);
 		Y3.add(1700F);
 		Y3.add(1083F);
@@ -73,7 +73,7 @@ public class DrawFrame extends JFrame
 		Y3.add(123F);
 
 		//Формируем данные для построения графика среднего времени добавления для LinkedList
-		ArrayList <Float> X4 = new ArrayList();
+		ArrayList <Float> X4 = new ArrayList<>();
 		X4.add(0F);
 		X4.add(10F);
 		X4.add(100F);
@@ -81,7 +81,7 @@ public class DrawFrame extends JFrame
 		X4.add(10000F);
 		X4.add(100000F);
 
-		ArrayList <Float> Y4 = new ArrayList();
+		ArrayList <Float> Y4 = new ArrayList<>();
 		Y4.add(0F);
 		Y4.add(3150F);
 		Y4.add(2542F);
@@ -93,7 +93,7 @@ public class DrawFrame extends JFrame
 		// Remove ----------------------------------------------------------------------------------------------------
 
 		//Формируем данные для построения графика суммарного времени удаления для ArrayList
-		ArrayList <Float> X5 = new ArrayList();
+		ArrayList <Float> X5 = new ArrayList<>();
 		X5.add(0F);
 		X5.add(10F);
 		X5.add(100F);
@@ -101,7 +101,7 @@ public class DrawFrame extends JFrame
 		X5.add(10000F);
 		X5.add(100000F);
 
-		ArrayList <Float> Y5 = new ArrayList();
+		ArrayList <Float> Y5 = new ArrayList<>();
 		Y5.add(0F);
 		Y5.add(7100F);
 		Y5.add(76000F);
@@ -110,7 +110,7 @@ public class DrawFrame extends JFrame
 		Y5.add(88202300F);
 
 		//Формируем данные для построения графика суммарного времени удаления для LinkedList
-		ArrayList <Float> X6 = new ArrayList();
+		ArrayList <Float> X6 = new ArrayList<>();
 		X6.add(0F);
 		X6.add(10F);
 		X6.add(100F);
@@ -118,7 +118,7 @@ public class DrawFrame extends JFrame
 		X6.add(10000F);
 		X6.add(100000F);
 
-		ArrayList <Float> Y6 = new ArrayList();
+		ArrayList <Float> Y6 = new ArrayList<>();
 		Y6.add(0F);
 		Y6.add(22200F);
 		Y6.add(77600F);
@@ -127,7 +127,7 @@ public class DrawFrame extends JFrame
 		Y6.add(17853024900F);
 
 		//Формируем данные для построения графика среднего времени удаления для ArrayList
-		ArrayList <Float> X7 = new ArrayList();
+		ArrayList <Float> X7 = new ArrayList<>();
 		X7.add(0F);
 		X7.add(10F);
 		X7.add(100F);
@@ -135,7 +135,7 @@ public class DrawFrame extends JFrame
 		X7.add(10000F);
 		X7.add(100000F);
 
-		ArrayList <Float> Y7 = new ArrayList();
+		ArrayList <Float> Y7 = new ArrayList<>();
 		Y7.add(0F);
 		Y7.add(7100F);
 		Y7.add(7600F);
@@ -144,7 +144,7 @@ public class DrawFrame extends JFrame
 		Y7.add(8820F);
 
 		//Формируем данные для построения графика среднего времени удаления для LinkedList
-		ArrayList <Float> X8 = new ArrayList();
+		ArrayList <Float> X8 = new ArrayList<>();
 		X8.add(0F);
 		X8.add(10F);
 		X8.add(100F);
@@ -152,7 +152,7 @@ public class DrawFrame extends JFrame
 		X8.add(10000F);
 		X8.add(100000F);
 
-		ArrayList <Float> Y8 = new ArrayList();
+		ArrayList <Float> Y8 = new ArrayList<>();
 		Y8.add(0F);
 		Y8.add(22200F);
 		Y8.add(7760F);
