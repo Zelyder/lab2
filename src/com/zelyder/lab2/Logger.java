@@ -19,7 +19,7 @@ public class Logger {
                 writer.append(getNowTime()).append(typeName).append(message).append('\n');
                 writer.flush();
             }catch (IOException exception){
-                Logger.error(exception.getMessage());
+                System.err.println(exception.getMessage());
             }
         }
     }

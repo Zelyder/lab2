@@ -48,6 +48,11 @@ public class Main {
         printMenu();
         // Обработка действий пользователя
         handleInputMenu(zoo);
+        // Если были ошибки, то выводим их количество
+        int countOfErrors = ErrHandler.getErrCount();
+        if (countOfErrors != 0){
+            System.out.println("Количество ошибок: " + countOfErrors);
+        }
     }
 
     private static void printMenu() {
@@ -104,7 +109,7 @@ public class Main {
                 printMenu();
             } catch (Exception ex) {
                 System.out.println("Ошибка ввода!\nИспользуйте одну из этих команд:");
-                Logger.error("Ошибка ввода!");
+                ErrHandler.addErrWithLog(ex, "Ошибка ввода!");
                 printMenu();
             }
         }
@@ -206,7 +211,7 @@ public class Main {
                 settings.saveToFile();
                 return settings;
             }catch (Exception exception){
-                Logger.error(exception.getMessage());
+                ErrHandler.addErrWithLog(exception);
                 return null;
             }
         }

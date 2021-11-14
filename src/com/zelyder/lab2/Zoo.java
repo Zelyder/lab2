@@ -106,7 +106,7 @@ public class Zoo implements Serializable {
             Logger.info("БД успешно сохранено в файл" + PATH_TO_DB);
             return true;
         } catch (IOException exception) {
-            Logger.error(exception.getMessage());
+            ErrHandler.addErrWithLog(exception);
             return false;
         }
     }
@@ -122,7 +122,7 @@ public class Zoo implements Serializable {
             Logger.info("БД успешно загружена из файла " + PATH_TO_DB);
             return zooList;
         } catch (Exception exception) {
-            Logger.error("Ошибка записи в файл");
+            ErrHandler.addErrWithLog(exception, "Ошибка записи в файл");
             return null;
         }
     }
