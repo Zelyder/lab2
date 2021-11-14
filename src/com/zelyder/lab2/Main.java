@@ -2,9 +2,12 @@ package com.zelyder.lab2;
 
 import com.zelyder.lab2.animals.*;
 import com.zelyder.lab2.aviarys.*;
+import com.zelyder.lab2.graf.DrawFrame;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.Scanner;
@@ -31,7 +34,18 @@ public class Main {
      */
 
     public static void main(String[] args) {
-        testLists(10);
+        startUI();
+    }
+
+    private static void startUI() {
+        {
+            EventQueue.invokeLater(() -> {
+                JFrame frame = new DrawFrame();
+                frame.setTitle("DrawTest");
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setVisible(true);
+            });
+        }
     }
 
     private static void launchApp() {
