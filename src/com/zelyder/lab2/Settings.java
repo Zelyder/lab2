@@ -30,7 +30,7 @@ public class Settings implements Serializable {
             objectOutputStream.close();
             return true;
         }catch (IOException exception){
-            Log.error(exception.getMessage());
+            Logger.error(exception.getMessage());
             return false;
         }
     }
@@ -45,7 +45,7 @@ public class Settings implements Serializable {
             objectInputStream.close();
             return settings;
         }catch (Exception exception){
-            Log.error(exception.getMessage());
+            Logger.error(exception.getMessage());
             return null;
         }
     }

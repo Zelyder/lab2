@@ -5,9 +5,9 @@ import java.io.IOException;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 
-public class Log {
+public class Logger {
     public static Boolean isLogging = true;
-    static void log(String message, Type type) {
+    static void log(Type type, String message) {
         if(isLogging){
             String typeName = "";
             if (type == Type.INFO){
@@ -19,17 +19,17 @@ public class Log {
                 writer.append(getNowTime()).append(typeName).append(message).append('\n');
                 writer.flush();
             }catch (IOException exception){
-                Log.error(exception.getMessage());
+                Logger.error(exception.getMessage());
             }
         }
     }
 
     static void info(String message){
-        log(message, Type.INFO);
+        log(Type.INFO, message);
     }
 
     static void error(String errorMessage){
-        log(errorMessage, Type.ERROR);
+        log(Type.ERROR, errorMessage);
     }
 
     static String getNowTime(){

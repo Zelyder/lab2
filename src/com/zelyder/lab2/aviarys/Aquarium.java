@@ -9,6 +9,7 @@ public class Aquarium extends Aviary implements Serializable {
 
     public Aquarium(){
         super();
+        type = Type.Aquarium;
     }
     public Aquarium(int capacity){
         super(capacity);

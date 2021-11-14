@@ -8,6 +8,7 @@ import java.io.Serializable;
 public class OpenAviary extends Aviary implements Serializable {
     public OpenAviary(){
         super();
+        type = Type.Open;
     }
     public OpenAviary(int capacity){
         super(capacity);

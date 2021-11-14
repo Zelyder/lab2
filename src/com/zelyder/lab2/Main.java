@@ -2,6 +2,7 @@ package com.zelyder.lab2;
 
 import com.zelyder.lab2.animals.*;
 import com.zelyder.lab2.aviarys.*;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Locale;
@@ -39,7 +40,7 @@ public class Main {
         if (settings != null){
             System.out.println("Добро пожаловать " + settings.login);
             System.out.println("Запись в лог:" + settings.writeLog);
-            Log.info("Страт программы под логином " + settings.login);
+            Logger.info("Страт программы под логином " + settings.login);
         }else {
             System.out.println("Ошибка инициализации настроек");
         }
@@ -62,7 +63,7 @@ public class Main {
                 Scanner sc = new Scanner(System.in);
                 switch (sc.nextInt()) {
                     case 0:
-                        Log.info("Выход из программы");
+                        Logger.info("Выход из программы");
                         return;
                     case 1:
                         if(isZooNoNull(zoo)){
@@ -78,7 +79,7 @@ public class Main {
                         break;
                     case 3:
                         if(isZooNoNull(zoo)){
-                            Objects.requireNonNull(zoo).addAnimal(randomAnimal());
+                            Objects.requireNonNull(zoo).addAnimal(randomAnimal(Aviary.Type.Null));
                         }
                         break;
                     case 4:
@@ -103,7 +104,7 @@ public class Main {
                 printMenu();
             } catch (Exception ex) {
                 System.out.println("Ошибка ввода!\nИспользуйте одну из этих команд:");
-                Log.error("Ошибка ввода!");
+                Logger.error("Ошибка ввода!");
                 printMenu();
             }
         }
@@ -130,20 +131,24 @@ public class Main {
         return aviary;
     }
 
-    private static Animal randomAnimal() {
+    private static Animal randomAnimal(Aviary.Type type) {
         Animal animal;
-        switch (getRandomIntegerBetweenRange(1, 4)) {
+        int animalInt = type.value;
+        if (type == Aviary.Type.Null) {
+            animalInt = getRandomIntegerBetweenRange(1, 4);
+        }
+        switch (animalInt) {
             case 1:
-                animal = new ColdBlooded(getRandomDoubleBetweenRange(0.1, 10), getRandomIntegerBetweenRange(1, 10));
+                animal = new Waterfowl(getRandomDoubleBetweenRange(0.1, 20), getRandomIntegerBetweenRange(1, 10));
                 break;
             case 2:
                 animal = new Feathered(getRandomDoubleBetweenRange(0.5, 5), getRandomIntegerBetweenRange(1, 10));
                 break;
             case 3:
-                animal = new Ungulates(getRandomDoubleBetweenRange(1, 500), getRandomIntegerBetweenRange(1, 20));
+                animal = new ColdBlooded(getRandomDoubleBetweenRange(0.1, 10), getRandomIntegerBetweenRange(1, 10));
                 break;
             case 4:
-                animal = new Waterfowl(getRandomDoubleBetweenRange(0.1, 20), getRandomIntegerBetweenRange(1, 10));
+                animal = new Ungulates(getRandomDoubleBetweenRange(1, 500), getRandomIntegerBetweenRange(1, 20));
                 break;
             default:
                 throw new IllegalStateException("Unexpected value");
@@ -164,6 +169,12 @@ public class Main {
         zoo.addAviary(nightAviary);
         zoo.addAviary(openAviary);
         return zoo;
+    }
+
+    private void fillAviary(@NotNull Aviary aviary){
+        for(int i = 0; i < aviary.getCapacity(); i++){
+            aviary.addAnimal(randomAnimal(aviary.getType()));
+        }
     }
 
     private static @Nullable Settings initSettings() {
@@ -190,12 +201,12 @@ public class Main {
                             System.out.println("Неверный ввод!\nВведите да или нет:");
                     }
                 }
-                Log.isLogging = writeLog;
+                Logger.isLogging = writeLog;
                 Settings settings = new Settings(login, writeLog);
                 settings.saveToFile();
                 return settings;
             }catch (Exception exception){
-                Log.error(exception.getMessage());
+                Logger.error(exception.getMessage());
                 return null;
             }
         }
@@ -213,12 +224,12 @@ public class Main {
     }
 
 
-    private static boolean isZooNoNull(Zoo zoo){
+    private static boolean isZooNoNull(@Nullable Zoo zoo){
         if (zoo != null) {
             return true;
         } else {
             System.out.println("Zoo не инициализирован!");
-            Log.error("Zoo не инициализирован!");
+            Logger.error("Zoo не инициализирован!");
         }
         return false;
     }

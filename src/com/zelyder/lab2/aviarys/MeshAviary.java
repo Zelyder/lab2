@@ -8,6 +8,7 @@ import java.io.Serializable;
 public class MeshAviary extends Aviary implements Serializable {
     public MeshAviary(){
         super();
+        type = Type.Mesh;
     }
     public MeshAviary(int capacity){
         super(capacity);

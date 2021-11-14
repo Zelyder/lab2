@@ -8,6 +8,7 @@ import java.io.Serializable;
 public class NightAviary extends Aviary implements Serializable {
     public NightAviary(){
         super();
+        type = Type.Night;
     }
     public NightAviary(int capacity){
         super(capacity);

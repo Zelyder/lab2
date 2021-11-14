@@ -40,7 +40,7 @@ public class Zoo implements Serializable {
         long end = System.currentTimeMillis();
         int index = aviaries.size() -1;
         long time = end - start;
-        Log.info("add, index=" + index + " ,time=" + time);
+        Logger.info("add, index=" + index + " ,time=" + time);
     }
 
     public void removeAviary(Aviary aviary) {
@@ -52,7 +52,7 @@ public class Zoo implements Serializable {
         aviaries.remove(index);
         long end = System.currentTimeMillis();
         long time = end - start;
-        Log.info("remove, index=" + index + " ,time=" + time);
+        Logger.info("remove, index=" + index + " ,time=" + time);
     }
 
     public List<Aviary> switchAviaryListType(TypeOfList type) {
@@ -68,7 +68,7 @@ public class Zoo implements Serializable {
         for (Aviary aviary : aviaries) {
             if (aviary.canAdd(animal)) {
                 animal.move(aviary);
-                Log.info("Добавлено животное:" + animal);
+                Logger.info("Добавлено животное:" + animal);
                 break;
             }
         }
@@ -103,10 +103,10 @@ public class Zoo implements Serializable {
             objectOutputStream.writeObject(this);
             //закрываем поток и освобождаем ресурсы
             objectOutputStream.close();
-            Log.info("БД успешно сохранено в файл" + PATH_TO_DB);
+            Logger.info("БД успешно сохранено в файл" + PATH_TO_DB);
             return true;
         } catch (IOException exception) {
-            Log.error(exception.getMessage());
+            Logger.error(exception.getMessage());
             return false;
         }
     }
@@ -119,10 +119,10 @@ public class Zoo implements Serializable {
 
             Zoo zooList = (Zoo) objectInputStream.readObject();
             objectInputStream.close();
-            Log.info("БД успешно загружена из файла " + PATH_TO_DB);
+            Logger.info("БД успешно загружена из файла " + PATH_TO_DB);
             return zooList;
         } catch (Exception exception) {
-            Log.error("Ошибка записи в файл");
+            Logger.error("Ошибка записи в файл");
             return null;
         }
     }
