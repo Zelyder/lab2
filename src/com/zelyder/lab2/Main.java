@@ -1,13 +1,11 @@
 package com.zelyder.lab2;
 
 import com.zelyder.lab2.animals.*;
-import com.zelyder.lab2.aviarys.Aquarium;
-import com.zelyder.lab2.aviarys.MeshAviary;
-import com.zelyder.lab2.aviarys.NightAviary;
-import com.zelyder.lab2.aviarys.OpenAviary;
+import com.zelyder.lab2.aviarys.*;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Locale;
+import java.util.Objects;
 import java.util.Scanner;
 
 /**
@@ -23,9 +21,10 @@ public class Main {
      * Управление
      * 0) Выход
      * 1) Показать весь зоопарк
-     * 2) Добавить случайное животное в зоопарк
-     * 3) Загрузить БД из файла
-     * 4) Сохранить БД в файл
+     * 2) Удалить вальер по индексу
+     * 3) Добавить случайное животное в зоопарк
+     * 4) Загрузить БД из файла
+     * 5) Сохранить БД в файл
      *
      * @param args аргументы косандной строки
      */
@@ -44,9 +43,6 @@ public class Main {
         }else {
             System.out.println("Ошибка инициализации настроек");
         }
-
-
-
         // Вывод на экран главного меню
         printMenu();
         // Обработка действий пользователя
@@ -55,7 +51,8 @@ public class Main {
 
     private static void printMenu() {
         System.out.println(
-                "0) Выход \n1) Показать весь зоопарк \n2) Добавить случайное животное в зоопарк \n3) Загрузить БД из файла \n4) Сохранить БД в файл"
+                "0) Выход \n1) Показать весь зоопарк \n2) Удалить вальер по индексу \n" +
+                        "3) Добавить случайное животное в зоопарк\n4) Загрузить БД из файла \n5) Сохранить БД в файл"
         );
     }
 
@@ -68,22 +65,23 @@ public class Main {
                         Log.info("Выход из программы");
                         return;
                     case 1:
-                        if (zoo != null) {
+                        if(isZooNoNull(zoo)){
                             System.out.println(zoo);
-                        } else {
-                            System.out.println("Zoo не инициализирован!");
-                            Log.error("Zoo не инициализирован!");
                         }
                         break;
                     case 2:
-                        if (zoo != null) {
-                            zoo.addAnimal(randomAnimal());
-                        } else {
-                            System.out.println("Zoo не инициализирован!");
-                            Log.error("Zoo не инициализирован!");
+                        if (isZooNoNull(zoo)) {
+                            System.out.println("Введите индекс вальера, из который хотите удалить животное");
+                            int index = sc.nextInt();
+                            zoo.removeAviaryByIndex(index);
                         }
                         break;
                     case 3:
+                        if(isZooNoNull(zoo)){
+                            Objects.requireNonNull(zoo).addAnimal(randomAnimal());
+                        }
+                        break;
+                    case 4:
                         if (Zoo.getFromFile() != null) {
                             zoo = Zoo.getFromFile();
                             System.out.println("Файл успешно загружен!");
@@ -91,16 +89,14 @@ public class Main {
                             System.out.println("Ошибка загрузки! Проверьте наличие файла " + Zoo.PATH_TO_DB);
                         }
                         break;
-                    case 4:
-                        if (zoo != null) {
+                    case 5:
+                        if (isZooNoNull(zoo)) {
                             if (zoo.saveToFile()) {
                                 System.out.println("БД успешно сохранена в файл " + Zoo.PATH_TO_DB);
                             } else {
                                 System.out.println("Ошибка Сохранения файла!");
                             }
                         }
-
-                        break;
                     default:
                         System.out.println("Введина не существующая команда!\nИспользуйте одну из этих команд:");
                 }
@@ -111,6 +107,27 @@ public class Main {
                 printMenu();
             }
         }
+    }
+
+    private static Aviary randomAviary(int capacity){
+        Aviary aviary;
+        switch (getRandomIntegerBetweenRange(1, 4)) {
+            case 1:
+                aviary = new Aquarium(capacity);
+                break;
+            case 2:
+                aviary = new MeshAviary(capacity);
+                break;
+            case 3:
+                aviary = new NightAviary(capacity);
+                break;
+            case 4:
+                aviary = new OpenAviary(capacity);
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value");
+        }
+        return aviary;
     }
 
     private static Animal randomAnimal() {
@@ -193,5 +210,16 @@ public class Main {
 
     public static double getRandomDoubleBetweenRange(double min, double max) {
         return (Math.random() * ((max - min) + 1)) + min;
+    }
+
+
+    private static boolean isZooNoNull(Zoo zoo){
+        if (zoo != null) {
+            return true;
+        } else {
+            System.out.println("Zoo не инициализирован!");
+            Log.error("Zoo не инициализирован!");
+        }
+        return false;
     }
 }
