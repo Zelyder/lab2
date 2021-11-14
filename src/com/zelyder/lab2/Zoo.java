@@ -20,6 +20,8 @@ public class Zoo implements Serializable {
         }
     }
 
+
+
     private List<Aviary> aviaries;
 
     public ArrayList<Aviary> getArrayListAviaries() {
@@ -35,12 +37,12 @@ public class Zoo implements Serializable {
     }
 
     public void addAviary(Aviary aviary) {
-        long start = System.currentTimeMillis();
+        long start = System.nanoTime();
         aviaries.add(aviary);
-        long end = System.currentTimeMillis();
+        long end = System.nanoTime();
         int index = aviaries.size() -1;
         long time = end - start;
-        Logger.info("add, index=" + index + " ,time=" + time);
+        Logger.add(index, time);
     }
 
     public void removeAviary(Aviary aviary) {
@@ -48,11 +50,11 @@ public class Zoo implements Serializable {
     }
 
     public void removeAviaryByIndex(int index) {
-        long start = System.currentTimeMillis();
+        long start = System.nanoTime();
         aviaries.remove(index);
-        long end = System.currentTimeMillis();
+        long end = System.nanoTime();
         long time = end - start;
-        Logger.info("remove, index=" + index + " ,time=" + time);
+        Logger.remove(index, time);
     }
 
     public List<Aviary> switchAviaryListType(TypeOfList type) {
@@ -72,6 +74,10 @@ public class Zoo implements Serializable {
                 break;
             }
         }
+    }
+
+    public List<Aviary> getAviaries() {
+        return aviaries;
     }
 
     public void addAnimals(List<Animal> animals) {

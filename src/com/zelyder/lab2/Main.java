@@ -31,17 +31,20 @@ public class Main {
      */
 
     public static void main(String[] args) {
+        testLists(10);
+    }
 
+    private static void launchApp() {
         // Инициализация зоопарка
         Zoo zoo = initZoo();
 
         // Загрузка настроек
         Settings settings = initSettings();
-        if (settings != null){
+        if (settings != null) {
             System.out.println("Добро пожаловать " + settings.login);
             System.out.println("Запись в лог:" + settings.writeLog);
             Logger.info("Страт программы под логином " + settings.login);
-        }else {
+        } else {
             System.out.println("Ошибка инициализации настроек");
         }
         // Вывод на экран главного меню
@@ -50,9 +53,52 @@ public class Main {
         handleInputMenu(zoo);
         // Если были ошибки, то выводим их количество
         int countOfErrors = ErrHandler.getErrCount();
-        if (countOfErrors != 0){
+        if (countOfErrors != 0) {
             System.out.println("Количество ошибок: " + countOfErrors);
         }
+    }
+
+    private static void testLists(int countOfElements) {
+        Zoo arrayZoo = new Zoo(Zoo.TypeOfList.ArrayList);
+        Zoo linkedZoo = new Zoo(Zoo.TypeOfList.LinkedList);
+        String result;
+
+//        Logger.info("ArrayList");
+//        System.out.println("ArrayList");
+//        result = testList(arrayZoo, countOfElements);
+//        System.out.println(result);
+//        Logger.info("\n" + result);
+//
+//        System.out.println();
+//        Logger.resetTime();
+
+        Logger.info("LinkedList");
+        System.out.println("LinkedList");
+        result = testList(linkedZoo, countOfElements);
+        System.out.println(result);
+        Logger.info("\n" + result);
+
+    }
+
+    private static String testList(Zoo zoo, int countOfElements) {
+        // Добовляем вальеры и заполняем их случайными животными
+        for (int i = 0; i < countOfElements; i++) {
+            Aviary aviary = randomAviary(100);
+            fillAviary(aviary);
+            zoo.addAviary(aviary);
+        }
+        // удаляем 10 % случайных элементов в списке
+        for (int i = 0; i < countOfElements * 0.1; i++) {
+            zoo.removeAviaryByIndex(
+                    getRandomIntegerBetweenRange(
+                            0,
+                            zoo.getAviaries().size() - 1
+                    )
+            );
+        }
+        return "Add: Total time = " + Logger.getTotalAddTime() + ", Average time = " + Logger.getAverageAddTime() +
+                "\nRemove: Total time = " + Logger.getTotalRemoveTime() + ", Average time = " +
+                Logger.getAverageRemoveTime();
     }
 
     private static void printMenu() {
@@ -71,7 +117,7 @@ public class Main {
                         Logger.info("Выход из программы");
                         return;
                     case 1:
-                        if(isZooNoNull(zoo)){
+                        if (isZooNoNull(zoo)) {
                             System.out.println(zoo);
                         }
                         break;
@@ -83,7 +129,7 @@ public class Main {
                         }
                         break;
                     case 3:
-                        if(isZooNoNull(zoo)){
+                        if (isZooNoNull(zoo)) {
                             Objects.requireNonNull(zoo).addAnimal(randomAnimal(Aviary.Type.Null));
                         }
                         break;
@@ -115,7 +161,7 @@ public class Main {
         }
     }
 
-    private static Aviary randomAviary(int capacity){
+    private static Aviary randomAviary(int capacity) {
         Aviary aviary;
         switch (getRandomIntegerBetweenRange(1, 4)) {
             case 1:
@@ -176,14 +222,14 @@ public class Main {
         return zoo;
     }
 
-    private void fillAviary(@NotNull Aviary aviary){
-        for(int i = 0; i < aviary.getCapacity(); i++){
+    private static void fillAviary(@NotNull Aviary aviary) {
+        for (int i = 0; i < aviary.getCapacity(); i++) {
             aviary.addAnimal(randomAnimal(aviary.getType()));
         }
     }
 
     private static @Nullable Settings initSettings() {
-        if (Settings.getFromFile() == null){
+        if (Settings.getFromFile() == null) {
             try {
                 Scanner scanner = new Scanner(System.in);
 
@@ -193,8 +239,8 @@ public class Main {
                 boolean writeLog = false;
                 System.out.println("Записывать ли логи?\nВведите да или нет:");
                 boolean correctInput = false;
-                while (!correctInput){
-                    switch (scanner.next().trim().toLowerCase(Locale.ROOT)){
+                while (!correctInput) {
+                    switch (scanner.next().trim().toLowerCase(Locale.ROOT)) {
                         case "да":
                             writeLog = true;
                             correctInput = true;
@@ -210,12 +256,11 @@ public class Main {
                 Settings settings = new Settings(login, writeLog);
                 settings.saveToFile();
                 return settings;
-            }catch (Exception exception){
+            } catch (Exception exception) {
                 ErrHandler.addErrWithLog(exception);
                 return null;
             }
-        }
-        else {
+        } else {
             return Settings.getFromFile();
         }
     }
@@ -229,7 +274,7 @@ public class Main {
     }
 
 
-    private static boolean isZooNoNull(@Nullable Zoo zoo){
+    private static boolean isZooNoNull(@Nullable Zoo zoo) {
         if (zoo != null) {
             return true;
         } else {
