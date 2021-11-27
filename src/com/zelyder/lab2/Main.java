@@ -8,9 +8,11 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Locale;
-import java.util.Objects;
-import java.util.Scanner;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.Writer;
+import java.util.*;
+import java.util.List;
 
 /**
  * Вариант 6
@@ -40,12 +42,90 @@ public class Main {
     private static void startUI() {
         {
             EventQueue.invokeLater(() -> {
-                JFrame frame = new DrawFrame();
-                frame.setTitle("Draw List Tests result");
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.setVisible(true);
+                //Формируем данные для построения графика суммарного времени добавления для ArrayList (красный)
+                //Формируем данные для построения графика суммарного времени добавления для LinkedList (Зеленый)
+
+                drawGraf("Суммарное время добавления",
+                        Arrays.asList(
+                                0F,
+                                17000F,
+                                108300F,
+                                633100F,
+                                1840500F,
+                                12326100F
+                        ),
+                        Arrays.asList(
+                                0F,
+                                31500F,
+                                254200F,
+                                713000F,
+                                1915800F,
+                                7634300F
+                        )
+                );
+                drawGraf("среднее время добавления",
+                        Arrays.asList(
+                                0F,
+                                1700F,
+                                1083F,
+                                633F,
+                                184F,
+                                123F
+                        ),
+                        Arrays.asList(
+                                0F,
+                                3150F,
+                                2542F,
+                                713F,
+                                191F,
+                                76F
+                        )
+                );
+                drawGraf("Суммарное временя удаления",
+                        Arrays.asList(
+                                0F,
+                                7100F,
+                                76000F,
+                                334100F,
+                                2205200F,
+                                88202300F
+                        ),
+                        Arrays.asList(
+                                0F,
+                                22200F,
+                                77600F,
+                                4794200F,
+                                86354700F,
+                                17853024900F
+                        )
+                );
+                drawGraf("Среднее временя удаления",
+                        Arrays.asList(
+                                0F,
+                                7100F,
+                                7600F,
+                                3341F,
+                                2205F,
+                                8820F
+                        ),
+                        Arrays.asList(
+                                0F,
+                                22200F,
+                                7760F,
+                                47942F,
+                                86354F,
+                                1785302F
+                        )
+                );
             });
         }
+    }
+
+    private static void drawGraf(String title, List<Float> Y1, List<Float> Y2) {
+        JFrame frame = new DrawFrame(new ArrayList(Y1), new ArrayList(Y2));
+        frame.setTitle(title);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
     }
 
     private static void launchApp() {
